@@ -14,15 +14,12 @@ export default function CartComponent() {
         productId: item.id,
         quantity: item.quantity,
       }));
-      const rs = await axiosIntances.post(
-        "/oders",
-        { body: products },
-        { headers: { "X-Api-Key": apiKey } }
-      );
-      console.log(rs);
-      toast.success("Đặt hàng thành công ٩(＾◡＾)۶");
-    } catch {
-      toast.error("Có lỗi xảy ra (˃̣̣̥⌓˂̣̣̥ )");
+      const rs = await axiosIntances.post("/orders", products, {
+        headers: { "X-Api-Key": apiKey },
+      });
+      if (rs) {
+        toast.success("Đặt hàng thành công ٩(＾◡＾)۶");
+      }
     } finally {
       setCart([]);
       localStorage.removeItem("cart");

@@ -34,15 +34,17 @@ export default function ListProductsComponent() {
             : item
         )
       );
-      localStorage.setItem("cart", JSON.stringify(cart));
     } else {
       setCart([...cart, product]);
-      localStorage.setItem("cart", JSON.stringify(cart));
     }
+    toast.success("Đã thêm 1 sản phẩm vào giỏ hàng（人´∀`*）");
   };
   useEffect(() => {
     getProducts();
   }, []);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   return (
     <div className="product-list grid grid-cols-4 gap-4">
       {!listProducts ? (
